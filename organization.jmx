@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="CRUD-Organization" enabled="true">
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <stringProp name="TestPlan.comments"></stringProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="interface" elementType="Argument">
+            <stringProp name="Argument.name">interface</stringProp>
+            <stringProp name="Argument.value">${__P(Interface)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="ProxyIp" elementType="Argument">
+            <stringProp name="Argument.name">ProxyIp</stringProp>
+            <stringProp name="Argument.value">${__P(ProxyIp)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TargetServer" elementType="Argument">
+            <stringProp name="Argument.name">TargetServer</stringProp>
+            <stringProp name="Argument.value">${__P(TargetServer)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TestSuiteDir" elementType="Argument">
+            <stringProp name="Argument.name">TestSuiteDir</stringProp>
+            <stringProp name="Argument.value">${__P(TestSuiteDir)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="prefix" elementType="Argument">
+            <stringProp name="Argument.name">prefix</stringProp>
+            <stringProp name="Argument.value">[CRUD-Organization]-</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="management.ip" elementType="Argument">
+            <stringProp name="Argument.name">management.ip</stringProp>
+            <stringProp name="Argument.value">${__P(ManagementIp)}:8080</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Organization" enabled="true">
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.duration">10</stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <longProp name="ThreadGroup.start_time">1294124548000</longProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <longProp name="ThreadGroup.end_time">1294124548000</longProp>
+      </ThreadGroup>
+      <hashTree>
+        <com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler guiclass="com.sonoa.testharness.protocol.http.sampler.gui.SonoaHttpSamplerGui" testclass="com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler" testname="${prefix}CreateOrganization" enabled="true">
+          <stringProp name="AbstractSonoaSampler.test_id"></stringProp>
+          <stringProp name="AbstractSonoaSampler.request_content">&lt;Organization name=&quot;DemoOrganization&quot; type=&quot;trial&quot;&gt;	  
+    &lt;DisplayName&gt;Organization for Demo&lt;/DisplayName&gt;
+    &lt;Description&gt;Demo Org&apos;s Description&lt;/Description&gt;
+    &lt;Properties&gt;
+        &lt;Property name=&quot;Company&quot;&gt;WarnerBros&lt;/Property&gt;
+        &lt;Property name=&quot;Series&quot;&gt;Supernaturals&lt;/Property&gt;
+    &lt;/Properties&gt;
+&lt;/Organization&gt;</stringProp>
+          <stringProp name="SonoaHttpSampler.request_chunk_size"></stringProp>
+          <boolProp name="SonoaHttpSampler.is_request_chunked">false</boolProp>
+          <stringProp name="SonoaHttpSampler.http_version">HTTP/1.1</stringProp>
+          <stringProp name="SonoaHttpSampler.http_method">POST</stringProp>
+          <boolProp name="SonoaHttpSampler.auto_generate_content_length">true</boolProp>
+          <objProp>
+            <name>AbstractSonoaSampler.content_encoding</name>
+            <value class="com.sonoa.testharness.control.ContentEncoding$1">UTF_8</value>
+          </objProp>
+          <stringProp name="AbstractSonoaSampler.expected_response_content"></stringProp>
+          <objProp>
+            <name>SonoaHttpSampler.conn_reuse_strategy</name>
+            <value class="com.sonoa.testharness.protocol.http.KeepAliveStrategy$1">FOLLOW_HTTP_SPEC</value>
+          </objProp>
+          <boolProp name="AbstractSonoaSampler.validate_response_content">false</boolProp>
+          <stringProp name="AbstractSonoaSampler.url">http://${management.ip}/v1/organizations</stringProp>
+          <objProp>
+            <name>AbstractSonoaSampler.mep</name>
+            <value class="com.sonoa.testharness.sampler.MessageExchangePattern$2">REQUEST_RESPONSE</value>
+          </objProp>
+        </com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler>
+        <hashTree>
+          <com.sonoa.testharness.config.SonoaHeaderManager guiclass="com.sonoa.testharness.config.gui.SonoaHeaderManagerGui" testclass="com.sonoa.testharness.config.SonoaHeaderManager" testname="Sonoa Header Manager" enabled="true">
+            <elementProp name="SonoaHeaderManager.headers" elementType="com.sonoa.testharness.config.SonoaArguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="host" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">host</stringProp>
+                  <stringProp name="Argument.value">${__P(ManagementIp)}:8080</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+                <elementProp name="content-type" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">content-type</stringProp>
+                  <stringProp name="Argument.value">application/xml</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+                <elementProp name="Authorization" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">Authorization</stringProp>
+                  <stringProp name="Argument.value">Basic QWRtaW46c2VjcmV0</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </com.sonoa.testharness.config.SonoaHeaderManager>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49587">201</stringProp>
+            </collectionProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <XMLSchemaAssertion guiclass="XMLSchemaAssertionGUI" testclass="XMLSchemaAssertion" testname="XML Schema Assertion" enabled="true">
+            <stringProp name="xmlschema_assertion_filename">${TestSuiteDir}/CRUD/resources/organization.xsd</stringProp>
+            <stringProp name="TestPlan.comments">XSD Location</stringProp>
+          </XMLSchemaAssertion>
+          <hashTree/>
+        </hashTree>
+        <com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler guiclass="com.sonoa.testharness.protocol.http.sampler.gui.SonoaHttpSamplerGui" testclass="com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler" testname="${prefix}GetOrganization_BeforeUpdate" enabled="true">
+          <stringProp name="AbstractSonoaSampler.test_id"></stringProp>
+          <stringProp name="AbstractSonoaSampler.request_content"></stringProp>
+          <stringProp name="SonoaHttpSampler.request_chunk_size"></stringProp>
+          <boolProp name="SonoaHttpSampler.is_request_chunked">false</boolProp>
+          <stringProp name="SonoaHttpSampler.http_version">HTTP/1.1</stringProp>
+          <stringProp name="SonoaHttpSampler.http_method">GET</stringProp>
+          <boolProp name="SonoaHttpSampler.auto_generate_content_length">true</boolProp>
+          <objProp>
+            <name>AbstractSonoaSampler.content_encoding</name>
+            <value class="com.sonoa.testharness.control.ContentEncoding$1">UTF_8</value>
+          </objProp>
+          <stringProp name="AbstractSonoaSampler.expected_response_content"></stringProp>
+          <objProp>
+            <name>SonoaHttpSampler.conn_reuse_strategy</name>
+            <value class="com.sonoa.testharness.protocol.http.KeepAliveStrategy$1">FOLLOW_HTTP_SPEC</value>
+          </objProp>
+          <boolProp name="AbstractSonoaSampler.validate_response_content">false</boolProp>
+          <stringProp name="AbstractSonoaSampler.url">http://${management.ip}/v1/organizations/DemoOrganization</stringProp>
+          <objProp>
+            <name>AbstractSonoaSampler.mep</name>
+            <value class="com.sonoa.testharness.sampler.MessageExchangePattern$2">REQUEST_RESPONSE</value>
+          </objProp>
+        </com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler>
+        <hashTree>
+          <com.sonoa.testharness.config.SonoaHeaderManager guiclass="com.sonoa.testharness.config.gui.SonoaHeaderManagerGui" testclass="com.sonoa.testharness.config.SonoaHeaderManager" testname="Sonoa Header Manager" enabled="true">
+            <elementProp name="SonoaHeaderManager.headers" elementType="com.sonoa.testharness.config.SonoaArguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="host" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">host</stringProp>
+                  <stringProp name="Argument.value">${__P(ManagementIp)}:8080</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+                <elementProp name="content-type" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">content-type</stringProp>
+                  <stringProp name="Argument.value">application/xml</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+                <elementProp name="Authorization" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">Authorization</stringProp>
+                  <stringProp name="Argument.value">Basic QWRtaW46c2VjcmV0</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </com.sonoa.testharness.config.SonoaHeaderManager>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <XMLSchemaAssertion guiclass="XMLSchemaAssertionGUI" testclass="XMLSchemaAssertion" testname="XML Schema Assertion" enabled="true">
+            <stringProp name="xmlschema_assertion_filename">${TestSuiteDir}/CRUD/resources/organization.xsd</stringProp>
+            <stringProp name="TestPlan.comments">XSD Location</stringProp>
+          </XMLSchemaAssertion>
+          <hashTree/>
+        </hashTree>
+        <com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler guiclass="com.sonoa.testharness.protocol.http.sampler.gui.SonoaHttpSamplerGui" testclass="com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler" testname="${prefix}UpdateOrganization" enabled="true">
+          <stringProp name="AbstractSonoaSampler.test_id"></stringProp>
+          <stringProp name="AbstractSonoaSampler.request_content">&lt;Organization name=&quot;DemoOrganization&quot; type=&quot;trial&quot;&gt;	  
+    &lt;DisplayName&gt;Organization for Demo New&lt;/DisplayName&gt;
+    &lt;Description&gt;Demo Org&apos;s Description Updated&lt;/Description&gt;
+    &lt;Properties&gt;
+        &lt;Property name=&quot;Company&quot;&gt;WarnerBros&lt;/Property&gt;
+        &lt;Property name=&quot;Series&quot;&gt;Supernaturals&lt;/Property&gt;
+        &lt;Property name=&quot;Cast&quot;&gt;Jensen Ackles&lt;/Property&gt;
+    &lt;/Properties&gt;
+&lt;/Organization&gt;</stringProp>
+          <stringProp name="SonoaHttpSampler.request_chunk_size"></stringProp>
+          <boolProp name="SonoaHttpSampler.is_request_chunked">false</boolProp>
+          <stringProp name="SonoaHttpSampler.http_version">HTTP/1.1</stringProp>
+          <stringProp name="SonoaHttpSampler.http_method">POST</stringProp>
+          <boolProp name="SonoaHttpSampler.auto_generate_content_length">true</boolProp>
+          <objProp>
+            <name>AbstractSonoaSampler.content_encoding</name>
+            <value class="com.sonoa.testharness.control.ContentEncoding$1">UTF_8</value>
+          </objProp>
+          <stringProp name="AbstractSonoaSampler.expected_response_content"></stringProp>
+          <objProp>
+            <name>SonoaHttpSampler.conn_reuse_strategy</name>
+            <value class="com.sonoa.testharness.protocol.http.KeepAliveStrategy$1">FOLLOW_HTTP_SPEC</value>
+          </objProp>
+          <boolProp name="AbstractSonoaSampler.validate_response_content">false</boolProp>
+          <stringProp name="AbstractSonoaSampler.url">http://${management.ip}/v1/organizations/DemoOrganization</stringProp>
+          <objProp>
+            <name>AbstractSonoaSampler.mep</name>
+            <value class="com.sonoa.testharness.sampler.MessageExchangePattern$2">REQUEST_RESPONSE</value>
+          </objProp>
+        </com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler>
+        <hashTree>
+          <com.sonoa.testharness.config.SonoaHeaderManager guiclass="com.sonoa.testharness.config.gui.SonoaHeaderManagerGui" testclass="com.sonoa.testharness.config.SonoaHeaderManager" testname="Sonoa Header Manager" enabled="true">
+            <elementProp name="SonoaHeaderManager.headers" elementType="com.sonoa.testharness.config.SonoaArguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="host" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">host</stringProp>
+                  <stringProp name="Argument.value">${__P(ManagementIp)}:8080</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+                <elementProp name="content-type" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">content-type</stringProp>
+                  <stringProp name="Argument.value">application/xml</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+                <elementProp name="Authorization" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">Authorization</stringProp>
+                  <stringProp name="Argument.value">Basic QWRtaW46c2VjcmV0</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </com.sonoa.testharness.config.SonoaHeaderManager>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <XMLSchemaAssertion guiclass="XMLSchemaAssertionGUI" testclass="XMLSchemaAssertion" testname="XML Schema Assertion" enabled="true">
+            <stringProp name="xmlschema_assertion_filename">${TestSuiteDir}/CRUD/resources/organization.xsd</stringProp>
+            <stringProp name="TestPlan.comments">XSD Location</stringProp>
+          </XMLSchemaAssertion>
+          <hashTree/>
+        </hashTree>
+        <com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler guiclass="com.sonoa.testharness.protocol.http.sampler.gui.SonoaHttpSamplerGui" testclass="com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler" testname="${prefix}GetOrganization_AfterUpdate" enabled="true">
+          <stringProp name="AbstractSonoaSampler.test_id"></stringProp>
+          <stringProp name="AbstractSonoaSampler.request_content"></stringProp>
+          <stringProp name="SonoaHttpSampler.request_chunk_size"></stringProp>
+          <boolProp name="SonoaHttpSampler.is_request_chunked">false</boolProp>
+          <stringProp name="SonoaHttpSampler.http_version">HTTP/1.1</stringProp>
+          <stringProp name="SonoaHttpSampler.http_method">GET</stringProp>
+          <boolProp name="SonoaHttpSampler.auto_generate_content_length">true</boolProp>
+          <objProp>
+            <name>AbstractSonoaSampler.content_encoding</name>
+            <value class="com.sonoa.testharness.control.ContentEncoding$1">UTF_8</value>
+          </objProp>
+          <stringProp name="AbstractSonoaSampler.expected_response_content"></stringProp>
+          <objProp>
+            <name>SonoaHttpSampler.conn_reuse_strategy</name>
+            <value class="com.sonoa.testharness.protocol.http.KeepAliveStrategy$1">FOLLOW_HTTP_SPEC</value>
+          </objProp>
+          <boolProp name="AbstractSonoaSampler.validate_response_content">false</boolProp>
+          <stringProp name="AbstractSonoaSampler.url">http://${management.ip}/v1/organizations/DemoOrganization</stringProp>
+          <objProp>
+            <name>AbstractSonoaSampler.mep</name>
+            <value class="com.sonoa.testharness.sampler.MessageExchangePattern$2">REQUEST_RESPONSE</value>
+          </objProp>
+        </com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler>
+        <hashTree>
+          <com.sonoa.testharness.config.SonoaHeaderManager guiclass="com.sonoa.testharness.config.gui.SonoaHeaderManagerGui" testclass="com.sonoa.testharness.config.SonoaHeaderManager" testname="Sonoa Header Manager" enabled="true">
+            <elementProp name="SonoaHeaderManager.headers" elementType="com.sonoa.testharness.config.SonoaArguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="host" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">host</stringProp>
+                  <stringProp name="Argument.value">${__P(ManagementIp)}:8080</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+                <elementProp name="content-type" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">content-type</stringProp>
+                  <stringProp name="Argument.value">application/xml</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+                <elementProp name="Authorization" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">Authorization</stringProp>
+                  <stringProp name="Argument.value">Basic QWRtaW46c2VjcmV0</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </com.sonoa.testharness.config.SonoaHeaderManager>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <XMLSchemaAssertion guiclass="XMLSchemaAssertionGUI" testclass="XMLSchemaAssertion" testname="XML Schema Assertion" enabled="true">
+            <stringProp name="xmlschema_assertion_filename">${TestSuiteDir}/CRUD/resources/organization.xsd</stringProp>
+            <stringProp name="TestPlan.comments">XSD Location</stringProp>
+          </XMLSchemaAssertion>
+          <hashTree/>
+        </hashTree>
+        <com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler guiclass="com.sonoa.testharness.protocol.http.sampler.gui.SonoaHttpSamplerGui" testclass="com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler" testname="${prefix}DeleteOrganization" enabled="true">
+          <stringProp name="AbstractSonoaSampler.test_id"></stringProp>
+          <stringProp name="AbstractSonoaSampler.request_content"></stringProp>
+          <stringProp name="SonoaHttpSampler.request_chunk_size"></stringProp>
+          <boolProp name="SonoaHttpSampler.is_request_chunked">false</boolProp>
+          <stringProp name="SonoaHttpSampler.http_version">HTTP/1.1</stringProp>
+          <stringProp name="SonoaHttpSampler.http_method">DELETE</stringProp>
+          <boolProp name="SonoaHttpSampler.auto_generate_content_length">true</boolProp>
+          <objProp>
+            <name>AbstractSonoaSampler.content_encoding</name>
+            <value class="com.sonoa.testharness.control.ContentEncoding$1">UTF_8</value>
+          </objProp>
+          <stringProp name="AbstractSonoaSampler.expected_response_content"></stringProp>
+          <objProp>
+            <name>SonoaHttpSampler.conn_reuse_strategy</name>
+            <value class="com.sonoa.testharness.protocol.http.KeepAliveStrategy$1">FOLLOW_HTTP_SPEC</value>
+          </objProp>
+          <boolProp name="AbstractSonoaSampler.validate_response_content">false</boolProp>
+          <stringProp name="AbstractSonoaSampler.url">http://${management.ip}/v1/organizations/DemoOrganization</stringProp>
+          <objProp>
+            <name>AbstractSonoaSampler.mep</name>
+            <value class="com.sonoa.testharness.sampler.MessageExchangePattern$2">REQUEST_RESPONSE</value>
+          </objProp>
+        </com.sonoa.testharness.protocol.http.sampler.SonoaHttpSampler>
+        <hashTree>
+          <com.sonoa.testharness.config.SonoaHeaderManager guiclass="com.sonoa.testharness.config.gui.SonoaHeaderManagerGui" testclass="com.sonoa.testharness.config.SonoaHeaderManager" testname="Sonoa Header Manager" enabled="true">
+            <elementProp name="SonoaHeaderManager.headers" elementType="com.sonoa.testharness.config.SonoaArguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="host" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">host</stringProp>
+                  <stringProp name="Argument.value">${__P(ManagementIp)}:8080</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+                <elementProp name="content-type" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">content-type</stringProp>
+                  <stringProp name="Argument.value">application/xml</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+                <elementProp name="Authorization" elementType="com.sonoa.testharness.config.SonoaArgument">
+                  <stringProp name="Argument.name">Authorization</stringProp>
+                  <stringProp name="Argument.value">Basic QWRtaW46c2VjcmV0</stringProp>
+                  <boolProp name="SonoaArgument.enabled">true</boolProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </com.sonoa.testharness.config.SonoaHeaderManager>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <XMLSchemaAssertion guiclass="XMLSchemaAssertionGUI" testclass="XMLSchemaAssertion" testname="XML Schema Assertion" enabled="true">
+            <stringProp name="xmlschema_assertion_filename">${TestSuiteDir}/CRUD/resources/organization.xsd</stringProp>
+            <stringProp name="TestPlan.comments">XSD Location</stringProp>
+          </XMLSchemaAssertion>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="com.sonoa.testharness.visualizer.SonoaResultsVisualizer" testclass="ResultCollector" testname="Sonoa Results Visualizer" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>true</xml>
+            <fieldNames>false</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <fileName>true</fileName>
+            <sampleCount>true</sampleCount>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
